@@ -205,6 +205,11 @@ async function initDashboard() {
   const session = await requireSession();
   if (!session) return;
 
+  const emailName = session.user.email.split('@')[0];
+  const titleText = emailName.charAt(0).toUpperCase() + emailName.slice(1) + ' Dashboard';
+  const titleEl = document.getElementById('dashboard-title');
+  if (titleEl) titleEl.textContent = titleText;
+
   const currencyFormatter = createCurrencyFormatter(await getCurrencyCode());
   const sidebar = document.getElementById('sidebar');
   const { sidebarContent, footer, bottomNav } = createNavbar(session.user.email);
